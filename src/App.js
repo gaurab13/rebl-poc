@@ -1,15 +1,14 @@
-import React from 'react';
-import { useBlockstack} from 'react-blockstack'
-import { Blockstack } from 'react-blockstack/dist/context'
-import Main from './Main.js';
-import Landing from './Landing.js';
+import React from "react";
+import { useBlockstack } from "react-blockstack";
+import Content from "./Content.js";
+import Landing from "./Landing.js";
 
-export default function App (props) {
-  const { person, signIn } = useBlockstack()
+export default function App(props) {
+  const { person, signIn } = useBlockstack();
   return (
-  <Blockstack>
-     {signIn && <Landing/>}
-     {person && <Main person={person}/>}
-  </Blockstack>
-  )
+    <>
+      {signIn && <Landing />}
+      {person && <Content person={person} />}
+    </>
+  );
 }
