@@ -1,6 +1,7 @@
 import React from 'react';
 import TopBar from './TopBar.js';
-import MainContent from './MainContent';
+import { BrowserRouter } from 'react-router-dom';
+import AppRouter from '../AppRouter.js';
 
 export default function Content ({ person }) {
   const avatarUrl = person.avatarUrl() || 'https://s3.amazonaws.com/onename/avatar-placeholder.png';
@@ -13,7 +14,9 @@ export default function Content ({ person }) {
         </div>
         <div className="col-12 col-md-9 col-xl-10 border border-left-0">
           <TopBar avatarUrl={avatarUrl} name={name} />
-          <MainContent />
+          <BrowserRouter>
+            <AppRouter />
+          </BrowserRouter>
         </div>
       </div>      
     </main>
