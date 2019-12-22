@@ -1,10 +1,9 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import Card from "react-bootstrap/Card";
 import { useFile, useBlockstack } from 'react-blockstack';
 
 export default function MainContent() {
-  const { userSession } = useBlockstack();
-  const [credentials, setCredentials] = useFile('credentials');
+  const [credentials, setCredentials] = useFile('credentials.json');
   const title = useRef('');
   const address = useRef('');
   const handleClick = () => {

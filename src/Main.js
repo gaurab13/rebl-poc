@@ -1,5 +1,5 @@
 import React, {useRef} from 'react'
-import { useFile } from 'react-blockstack'
+import { useFile, useBlockstack } from 'react-blockstack'
 
 const avatarFallbackImage = 'https://s3.amazonaws.com/onename/avatar-placeholder.png';
 
@@ -47,6 +47,7 @@ function NoteField ({title, path, placeholder}) {
 }
 
 export default function Main ({ person }) {
+  const { signOut } = useBlockstack();
   return (
     <main className="panel-welcome mt-5">
       <div className="row">
@@ -54,6 +55,11 @@ export default function Main ({ person }) {
           <Profile person={person}/>
         </div>
       </div>
+      <button
+        className="btn btn-primary btn-lg"
+        onClick={ signOut }>
+        Log Out
+      </button>
       <div className="lead row mt-5">
         <div className="mx-auto col col-sm-10 col-md-8 px-4">
           <NoteField title="Note" path="note" placeholder="to yourself..."/>

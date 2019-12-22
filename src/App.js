@@ -1,7 +1,7 @@
 import React from "react";
 import { useBlockstack } from "react-blockstack";
-import Content from "./Content.js";
-import Landing from "./Landing.js";
+import Content from "./components/Content.js";
+import Landing from "./components/Landing.js";
 
 export default function App() {
   const { person, signIn } = useBlockstack();
