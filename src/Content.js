@@ -1,8 +1,10 @@
 import React from 'react';
-import { useBlockstack } from 'react-blockstack';
+import TopBar from './TopBar.js';
+import MainContent from './MainContent';
 
 export default function Content ({ person }) {
-  const { signOut } = useBlockstack();
+  const avatarUrl = person.avatarUrl() || 'https://s3.amazonaws.com/onename/avatar-placeholder.png';
+  const name = person.name() || 'User';
   return (
     <main className="container-fluid">
       <div className="row vh-100">
@@ -10,9 +12,8 @@ export default function Content ({ person }) {
           Sidebar
         </div>
         <div className="col-12 col-md-9 col-xl-10 border border-left-0">
-          <div className="top-bar d-flex">
-            Main Content
-          </div>
+          <TopBar avatarUrl={avatarUrl} name={name} />
+          <MainContent />
         </div>
       </div>      
     </main>
