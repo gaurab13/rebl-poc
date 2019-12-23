@@ -1,33 +1,25 @@
-import React, { useRef } from "react";
+import React from "react";
 import Card from "react-bootstrap/Card";
 import { useFile } from "react-blockstack";
 import { Link } from "react-router-dom";
 
-export default function MainContent({ walletPath }) {
+export default function MainContent(props) {
+  const componentPath = props.match.path;
+  const {walletPath} = props;
   const [credentials, setCredentials] = useFile(`${walletPath}.json`);
-  const title = useRef("");
-  const address = useRef("");
-  const handleClick = () => {
-    if (title.current.value.length && address.current.value.length) {
-      const newCred = {
-        walletName: title.current.value,
-        walletAddress: address.current.value
-      };
-      const oldCred = credentials ? JSON.parse(credentials) : [];
-      setCredentials(JSON.stringify([...oldCred, newCred]));
-    }
-  };
-
+  const handleDelete = () => {
+    setCredentials(null);
+  }
   return (
     <>
       <div className="row mt-3">
         <div className="col-12 py-1">
           <Link to="/">
-            <span className="p-2 border">
+            <span className="py-2">
               <i className="fa fa-arrow-left"></i> Back
             </span>
           </Link>
-          <span className="ml-3 font-weight-bold text-uppercase">{`${walletPath} Wallets`}</span>
+          <div className="mt-3 font-weight-bold text-uppercase">{`${walletPath} Wallets`}</div>
         </div>
       </div>
       {credentials === undefined ? (
@@ -56,50 +48,17 @@ export default function MainContent({ walletPath }) {
               )}
             </div>
           </div>
-          <br />
-          <div className="row">
-            <form className="col-12">
-              <div className="form-group row">
-                <label htmlFor="inputName" className="col-sm-2 col-form-label">
-                  Wallet Name
-                </label>
-                <div className="col-4">
-                  <input
-                    type="text"
-                    ref={title}
-                    className="form-control"
-                    id="inputName"
-                  />
-                </div>
-              </div>
-              <div className="form-group row">
-                <label
-                  htmlFor="inputAddress"
-                  className="col-sm-2 col-form-label"
-                >
-                  Wallet Address
-                </label>
-                <div className="col-4">
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="inputAddress"
-                    ref={address}
-                  />
-                </div>
-              </div>
-              <div className="form-group row">
-                <div className="col-sm-10">
-                  <button
-                    type="button"
-                    className="btn btn-primary"
-                    onClick={handleClick}
-                  >
-                    Save
-                  </button>
-                </div>
-              </div>
-            </form>
+          <div className="row mt-3">
+            <div className="col-2 py-1">
+              <Link to={`${componentPath}/new`}>
+                <span className="p-2 border">
+                  Create New <i className="fa fa-plus"></i>
+                </span>
+              </Link>
+            </div>
+            <div className="col-2 py-1">
+              <button className="btn btn-link" onClick={handleDelete}>Delete All</button>
+            </div>
           </div>
         </>
       )}
